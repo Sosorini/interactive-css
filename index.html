@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <object data="./ufo.svg"></object>
+  </body>
+  <script>
+    let svgElem = null;
+
+    function init() {
+      //   document.querySelector("object").removeEventListener("load", init);
+
+      svgElem = document
+        .querySelector("object")
+        .contentDocument.querySelector("svg");
+
+      svgElem
+        .getElementById("number-0")
+        .addEventListener("animationend", setAnimationStep1);
+    }
+
+    function setAnimationStep1() {
+      svgElem
+        .getElementById("number-0")
+        .removeEventListener("animationend", setAnimationStep1);
+
+      svgElem.getElementById("number-0").setAttribute("id", "soacking");
+      svgElem.getElementById("UFO-beam").setAttribute("id", "UFO-beam-shrink");
+
+      svgElem
+        .getElementById("soacking")
+        .addEventListener("animationend", setAnimationStep2);
+    }
+
+    function setAnimationStep2() {
+      svgElem
+        .getElementById("soacking")
+        .removeEventListener("animationend", setAnimationStep2);
+
+      svgElem.getElementById("soacking").setAttribute("id", "number-0");
+      svgElem.getElementById("UFO-beam-shrink").setAttribute("id", "UFO-beam");
+
+      svgElem
+        .getElementById("number-0")
+        .addEventListener("animationend", setAnimationStep1);
+    }
+
+    document.querySelector("object").addEventListener("load", init);
+  </script>
+</html>
